@@ -1,0 +1,5 @@
+@charset "utf-8";
+#canvas {
+    border: black solid 2px;
+    touch-action: none;
+}

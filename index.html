@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title></title>
+    <script>
+        let ctx;
+        let isDragging = false;
+
+        window.onload = function (){
+            let canvas = document.getElementById("canvas");
+            canvas.onmousedown = mouseDown;
+            canvas.onmousemove = mouseMove;
+            canvas.onmouseup = mouseUp;
+
+            //スマホ操作
+            canvas.addEventListener('pointerdown', mouseDown);
+            canvas.addEventListener('pointermove', mouseMove);
+            canvas.addEventListener('pointerup', mouseUp);
+
+            ctx = canvas.getContext("2d");
+            ctx.strokeStyle = "#00f";
+            ctx.lineWidth = 2;
+        }
+
+        function mouseDown(e){
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+            isDragging = true;
+        }
+        function mouseMove(e){
+            if(isDragging){
+                ctx.lineTo(e.offsetX, e.offsetY)
+                ctx.stroke();
+            }
+        }
+        function mouseUp(e){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            isDragging = false;
+        }
+    </script>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+</body>
+</html>
